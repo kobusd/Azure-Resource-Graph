@@ -1,4 +1,9 @@
 # Azure Resource Graph Examples
+Last updated October 4, 2018 2:39 PM
+
+[TOC]
+
+# az graph query --help
 **Command**
 
     az graph query : Query the resources managed by Azure Resource Manager.
@@ -94,7 +99,7 @@ az graph query -q "project tags | summarize buildschema(tags)" --subscriptions x
 az graph query -q "where type =~ 'microsoft.compute/virtualmachines' and name matches regex @'^cvallapimmo(.\*)[0-9]+$' | project name | order by name asc"
 
 ## Count VMs per location
-az graph query -q "where type =~ 'Microsoft.Compute/virtualMachines' | summarize count() by location" --subscriptions 40c4df1f-a6bb-44ba-8329-92e057f247c6
+az graph query -q "where type =~ 'Microsoft.Compute/virtualMachines' | summarize count() by location" --subscriptions xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
 
 ## Get count of VM sizes
 az graph query -q "where type =~ 'Microsoft.Compute/virtualMachines' | summarize vm_count = count() by tostring(properties.hardwareProfile.vmSize) | order by vm_count"
