@@ -1,1 +1,2 @@
+[TOC]
 # Azure-Resource-Graph
