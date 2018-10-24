@@ -5,3 +5,6 @@ az graph query -q "where type =~ 'Microsoft.Network/virtualNetworks' | extend ns
 
 ## Count vnets 
 az graph query -q "where type =~ 'Microsoft.Network/virtualNetworks' | summarize count()"
+
+## vnet address space
+az graph query -q "where type =~ 'Microsoft.Network/virtualNetworks' | project name, properties.addressSpace.addressPrefixes[0]"
