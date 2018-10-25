@@ -8,3 +8,6 @@ az graph query -q "where type =~ 'Microsoft.Network/virtualNetworks' | summarize
 
 ## vnet address space
 az graph query -q "where type =~ 'Microsoft.Network/virtualNetworks' | project name, properties.addressSpace.addressPrefixes[0]"
+
+## vnet address spaces to json file
+az graph query -q "where type =~ 'Microsoft.Network/virtualNetworks'| extend addressSpace =properties.addressSpace.addressPrefixes[0] | project name, subscriptionId, resourceGroup, addressSpace " >"vnet address ranges.json"
