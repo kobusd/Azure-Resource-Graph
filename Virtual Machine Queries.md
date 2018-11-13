@@ -16,3 +16,6 @@ az graph query -q "where type =~ 'Microsoft.Compute/virtualMachines' | summarize
 
 ## Get count of VM sizes
 az graph query -q "where type =~ 'Microsoft.Compute/virtualMachines' | summarize vm_count = count() by tostring(properties.hardwareProfile.vmSize) | order by vm_count"
+
+## Get all the classid VMs
+az graph query -q "where type =~ 'microsoft.classiccompute/virtualmachines'| project name, subscriptionId"
