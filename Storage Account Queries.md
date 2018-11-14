@@ -11,3 +11,6 @@ az graph query -q "where type =~ 'Microsoft.Storage/storageAccounts' | where pro
 
 ## list strorage account file not encrypted
 az graph query -q "where type =~ 'Microsoft.Storage/storageAccounts' | where properties.encryption.services.file.enabled==false"
+
+## list Unattached managed disks
+az graph query -q "where type =~ 'Microsoft.Compute/disks' and properties.diskState =~'Unattached' | project name, subscriptionId, resourceGroup, properties.diskState"
