@@ -11,5 +11,12 @@ az graph query -q "where type =~ 'Microsoft.Network/virtualNetworks' | project n
 
 ## vnet address spaces to json file
 az graph query -q "where type =~ 'Microsoft.Network/virtualNetworks'| extend addressSpace =properties.addressSpace.addressPrefixes[0] | project name, subscriptionId, resourceGroup, addressSpace " >"vnet address ranges.json"
+
+## List all public IP addresses
+az graph query -q "where type contains 'publicIPAddresses' and properties.ipAddress != '' | project properties.ipAddress | limit 100" --subscriptions xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
+
 ## get all public ip addresses and write to file
 az graph query -q "where type contains 'publicIPAddresses' and properties.ipAddress != '' | project properties.ipAddress" --first 5000 >> c:\output\AzureIPaddresses.txt
+
+## Count resources that have IP addresses configured by subscription
+az graph query -q "where type contains 'publicIPAddresses' and properties.ipAddress != '' | summarize count () by subscriptionId"
