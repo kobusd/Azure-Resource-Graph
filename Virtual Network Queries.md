@@ -1,6 +1,7 @@
 # Virtual Network Queries
+# [Microsoft.Network resource types](https://docs.microsoft.com/en-us/azure/templates/microsoft.network/allversions)
 
-## vnets/subnets without NSG 
+# vnets/subnets without NSG 
 az graph query -q "where type =~ 'Microsoft.Network/virtualNetworks' | extend nsg = tostring(properties.subnets[0].properties.networkSecurityGroup)| where isempty(nsg) | project name" 
 
 ## Count vnets 

@@ -1,4 +1,5 @@
 # Storage Account Queries
+## [Microsoft.Storage resource types](https://docs.microsoft.com/en-us/azure/templates/microsoft.storage/allversions)
 
 ## Show resources that contain storage
 az graph query -q "where type contains 'storage' | distinct type"

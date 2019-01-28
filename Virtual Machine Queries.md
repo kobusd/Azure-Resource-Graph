@@ -1,4 +1,6 @@
 # Virtual Machine Queries
+## [Microsoft.Compute resource types](https://docs.microsoft.com/en-us/azure/templates/microsoft.compute/allversions)
+
 ##Show all virtual machines ordered by name in descending order
 az graph query -q "project name, location, type| where type =~ 'Microsoft.Compute/virtualMachines' | order by name desc" --subscriptions xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
 
