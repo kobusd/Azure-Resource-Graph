@@ -1,5 +1,7 @@
 # Azure Resource Graph Examples
 
+This is a collection of helpful queries. Generic queries are contained in this document while specialized categories are shown below. 
+
 [Virtual Machine Queries](Virtual%20Machine%20Queries.md)
 
 [Virtual Network Queries](Virtual%20Network%20Queries.md)
