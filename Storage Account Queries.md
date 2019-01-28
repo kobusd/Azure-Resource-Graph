@@ -20,4 +20,5 @@ az graph query -q "where type =~ 'Microsoft.Compute/disks' and properties.diskSt
 
 ## List all storage accounts with specific tag value
 #*** don't know how this works
+
 az graph query -q "where type =~ 'Microsoft.Storage/storageAccounts' | where tags['tag with a space']=='Custom value'"
