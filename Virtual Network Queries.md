@@ -21,5 +21,5 @@ az graph query -q "where type contains 'publicIPAddresses' and properties.ipAddr
 ## Count resources that have IP addresses configured by subscription
 az graph query -q "where type contains 'publicIPAddresses' and properties.ipAddress != '' | summarize count () by subscriptionId"
 
-##determine SKU allowances for VM with a specific name pattern
+## determine SKU allowances for VM with a specific name pattern
 az graph query -q "where type =~ 'Microsoft.Compute/virtualMachines' | where name contains '<pattern>' | summarize vm_count = count() by tostring(properties.hardwareProfile.vmSize) |order by vm_count"
