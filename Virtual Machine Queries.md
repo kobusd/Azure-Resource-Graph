@@ -1,4 +1,7 @@
 # Virtual Machine Queries
+##Show all virtual machines ordered by name in descending order
+az graph query -q "project name, location, type| where type =~ 'Microsoft.Compute/virtualMachines' | order by name desc" --subscriptions xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
+
 ## Show first five virtual machines by name and their OS type
 az graph query -q "where type =~ 'Microsoft.Compute/virtualMachines' | project name, properties.storageProfile.osDisk.osType | top 5 by name desc"
 
@@ -22,3 +25,6 @@ az graph query -q "where type =~ 'Microsoft.Compute/virtualMachines' | summarize
 
 ## Get all the Classic VMs
 az graph query -q "where type =~ 'microsoft.classiccompute/virtualmachines'| project name, subscriptionId"
+
+## Virtual machines matched by regex
+az graph query -q "where type =~ 'microsoft.compute/virtualmachines' and name matches regex @'^cvallapimmo(.\*)[0-9]+$' | project name | order by name asc"
