@@ -53,53 +53,14 @@ Last updated October 4, 2018 2:39 PM
         11111111-1111-1111-1111-111111111111, 22222222-2222-2222-2222-222222222222
 
 ## Count Azure resources
-
-    az graph query -q "summarize count()"
+az graph query -q "summarize count()"
 
 ## List resources sorted by name
-
-    az graph query -q "project name, type, location | order by name asc" --subscriptions xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
-
-## Show all virtual machines ordered by name in descending order
-az graph query -q "project name, location, type| where type =~ 'Microsoft.Compute/virtualMachines' | order by name desc" --subscriptions xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
-
-## Show first five virtual machines by name and their OS type
-az graph query -q "where type =~ 'Microsoft.Compute/virtualMachines' | project name, properties.storageProfile.osDisk.osType | top 5 by name desc"
-
-## Count virtual machines by OS type
-az graph query -q "where type =~ 'Microsoft.Compute/virtualMachines' | summarize count() by tostring(properties.storageProfile.osDisk.osType)"
-
-## Show resources that contain storage
-az graph query -q "where type contains 'storage' | distinct type"
-
-## List all public IP addresses
-az graph query -q "where type contains 'publicIPAddresses' and properties.ipAddress != '' | project properties.ipAddress | limit 100" --subscriptions xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
-
-## Count resources that have IP addresses configured by subscription
-az graph query -q "where type contains 'publicIPAddresses' and properties.ipAddress != '' | summarize count () by subscriptionId"
+az graph query -q "project name, type, location | order by name asc" --subscriptions xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
 
 ## List resources with a specific tag value
 az graph query -q "where tags.owner=~'CloudOps & SecurityEng' | project name, subscriptionId, tags"
 
-## List all storage accounts with specific tag value
-#*** don't know how this works
-az graph query -q "where type =~ 'Microsoft.Storage/storageAccounts' | where tags['tag with a space']=='Custom value'"
-
-## Get VMSS capacity and size
-az graph query -q "where type=~ 'microsoft.compute/virtualmachinescalesets' | where name contains 'contoso' | project subscriptionId, name, location, resourceGroup, Capacity = toint(sku.capacity), Tier = sku.name | order by Capacity desc"
-
-## Get VMSS capacity and size
-az graph query -q "where type=~ 'microsoft.compute/virtualmachinescalesets' | where name contains 'contoso' | project subscriptionId, name, location, resourceGroup, Capacity = toint(sku.capacity), Tier = sku.name | order by Capacity desc"
-
 ## List all tag names
 az graph query -q "project tags | summarize buildschema(tags)" --subscriptions xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
 
-## Virtual machines matched by regex
-
-az graph query -q "where type =~ 'microsoft.compute/virtualmachines' and name matches regex @'^cvallapimmo(.\*)[0-9]+$' | project name | order by name asc"
-
-## Count VMs per location
-az graph query -q "where type =~ 'Microsoft.Compute/virtualMachines' | summarize count() by location" --subscriptions xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
-
-## Get count of VM sizes
-az graph query -q "where type =~ 'Microsoft.Compute/virtualMachines' | summarize vm_count = count() by tostring(properties.hardwareProfile.vmSize) | order by vm_count"
