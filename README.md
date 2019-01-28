@@ -1,6 +1,6 @@
 # Azure Resource Graph Examples
 
-[Virtual Machine Queries]Virtual%20Machine%20Queries.md)
+[Virtual Machine Queries](Virtual Machine Queries.md)
 [Virtual Network Queries](Virtual%20Network%20Queries.md)
 [Storage Account Queries](Storage%20Account%20Queries.md
 
