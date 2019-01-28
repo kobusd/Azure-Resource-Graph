@@ -1,6 +1,6 @@
 # Azure Resource Graph Examples
 
-[Virtual Network Queries](../Azure-Resource-Graph)
+[Virtual Network Queries](../Virtual Network Queries.md)
 
 [TOC]
 
