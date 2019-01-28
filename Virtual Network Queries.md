@@ -11,3 +11,5 @@ az graph query -q "where type =~ 'Microsoft.Network/virtualNetworks' | project n
 
 ## vnet address spaces to json file
 az graph query -q "where type =~ 'Microsoft.Network/virtualNetworks'| extend addressSpace =properties.addressSpace.addressPrefixes[0] | project name, subscriptionId, resourceGroup, addressSpace " >"vnet address ranges.json"
+## get all public ip addresses and write to file
+az graph query -q "where type contains 'publicIPAddresses' and properties.ipAddress != '' | project properties.ipAddress" --first 5000 >> c:\output\AzureIPaddresses.txt
