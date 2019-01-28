@@ -8,6 +8,8 @@ This is a collection of helpful queries. Generic queries are contained in this d
 
 [Storage Account Queries](Storage%20Account%20Queries.md)
 
+[App Insights Queries](App%20Insights%20Queries.md)
+
 [TOC]
 
 # az graph query --help
