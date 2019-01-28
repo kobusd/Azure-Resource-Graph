@@ -1,5 +1,6 @@
 # Azure Resource Graph Examples
-Last updated October 4, 2018 2:39 PM
+
+[Virtual Network Queries](../Azure-Resource-Graph)
 
 [TOC]
 
