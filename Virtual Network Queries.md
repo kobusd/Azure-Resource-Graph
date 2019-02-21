@@ -24,3 +24,6 @@ az graph query -q "where type contains 'publicIPAddresses' and properties.ipAddr
 
 ## determine SKU allowances for VM with a specific name pattern
 az graph query -q "where type =~ 'Microsoft.Compute/virtualMachines' | where name contains '<pattern>' | summarize vm_count = count() by tostring(properties.hardwareProfile.vmSize) |order by vm_count"
+
+## get peerings with disconnected status
+for /L %a in (0,1,10) Do az graph query -q "where type =~ 'Microsoft.Network/virtualNetworks' and properties.virtualNetworkPeerings[%a].properties.peeringState == 'Disconnected'| project name" 
