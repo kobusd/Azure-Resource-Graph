@@ -30,3 +30,9 @@ az graph query -q "where type =~ 'microsoft.classiccompute/virtualmachines'| pro
 
 ## Virtual machines matched by regex
 az graph query -q "where type =~ 'microsoft.compute/virtualmachines' and name matches regex @'^cvallapimmo(.\*)[0-9]+$' | project name | order by name asc"
+
+# Display all virtual machines that starts with TEST and ends with number.
+az graph query -q "where type =~ 'microsoft.compute/virtualmachines' | where name matches regex @'^TEST(.*)[0-9]+$'|project name"
+
+# Display all storage accounts that have the option to “Allow Access from all networks”
+az graph query -q "where type =~ 'microsoft.storage/storageaccounts' | where aliases['Microsoft.Storage/storageAccounts/networkAcls.defaultAction'] =='Allow'| summarize count()"
