@@ -31,6 +31,9 @@ az graph query -q "where type =~ 'microsoft.classiccompute/virtualmachines'| pro
 ## Virtual machines matched by regex
 az graph query -q "where type =~ 'microsoft.compute/virtualmachines' and name matches regex @'^cvallapimmo(.\*)[0-9]+$' | project name | order by name asc"
 
+##Virtual machine size by resourcegroup
+az graph query -q "where type =~ 'Microsoft.Compute/virtualMachines'| where location =~ 'eastus2' | summarize vm_count = count(properties.hardwareProfile.vmSize) by resourceGroup | order by vm_count"
+
 # Display all virtual machines that starts with TEST and ends with number.
 az graph query -q "where type =~ 'microsoft.compute/virtualmachines' | where name matches regex @'^TEST(.*)[0-9]+$'|project name"
 
