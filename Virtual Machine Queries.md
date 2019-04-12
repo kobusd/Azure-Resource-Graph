@@ -39,3 +39,6 @@ az graph query -q "where type =~ 'microsoft.compute/virtualmachines' | where nam
 
 # Display all storage accounts that have the option to “Allow Access from all networks”
 az graph query -q "where type =~ 'microsoft.storage/storageaccounts' | where aliases['Microsoft.Storage/storageAccounts/networkAcls.defaultAction'] =='Allow'| summarize count()"
+
+# Display vmSize count for each resource group
+az graph query -q "where type =~ 'Microsoft.Compute/virtualMachines'| summarize count() by resourceGroup, tostring(properties.hardwareProfile.vmSize) | sort by resourceGroup asc" --output table
