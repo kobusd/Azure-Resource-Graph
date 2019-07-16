@@ -74,3 +74,5 @@ az graph query -q "where tags.owner=~'CloudOps & SecurityEng' | project name, su
 ## List all tag names
 az graph query -q "project tags | summarize buildschema(tags)" --subscriptions xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
 
+## List owner tag with user name, return project name (resource)
+az graph query -q "where tags.owner =~'<exact Value>' | project name"
