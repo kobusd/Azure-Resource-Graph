@@ -10,6 +10,9 @@ az graph query -q "where type =~ 'Microsoft.Compute/virtualMachines' | project n
 ## Count virtual machines by OS type
 az graph query -q "where type =~ 'Microsoft.Compute/virtualMachines' | summarize count() by tostring(properties.storageProfile.osDisk.osType)"
 
+## Count Windows virtual machnines by offer(e.g. Server or Windows 10)
+az graph query -q "where type =~ 'Microsoft.Compute/virtualMachines' and tostring(properties.storageProfile.osDisk.osType) =~ 'Windows'| summarize count() by tostring(properties.storageProfile.imageReference.offer)"
+
 ## Get VMSs capacity and size
 az graph query -q "where type=~ 'microsoft.compute/virtualmachinescalesets' | where name contains 'contoso' | project subscriptionId, name, location, resourceGroup, Capacity = toint(sku.capacity), Tier = sku.name | order by Capacity desc"
 
