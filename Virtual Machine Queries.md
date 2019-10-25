@@ -45,3 +45,6 @@ az graph query -q "where type =~ 'microsoft.storage/storageaccounts' | where ali
 
 # Display vmSize count for each resource group
 az graph query -q "where type =~ 'Microsoft.Compute/virtualMachines'| summarize count() by resourceGroup, tostring(properties.hardwareProfile.vmSize) | sort by resourceGroup asc" --output table
+
+# Get IP address of VMs
+az graph query -q "resources | where type == 'microsoft.compute/virtualmachines' | project vm_name=name, nic_id=tostring(properties.networkProfile.networkInterfaces[0].id), vm_rg=resourceGroup| join (resources | where type == 'microsoft.network/networkinterfaces' | project nic_id=id, ip=tostring(properties.ipConfigurations[0].properties.privateIPAddress)) on nic_id| project vm=vm_name, ip, resourceGroup=vm_rg" --first 10
