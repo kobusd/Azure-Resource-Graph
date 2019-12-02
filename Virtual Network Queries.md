@@ -49,3 +49,12 @@ resources
 |where type == 'microsoft.network/networkinterfaces' and properties.ipConfigurations[0].properties.applicationSecurityGroups != '' 
 | project name, asg = tostring(properties.ipConfigurations[0].properties.applicationSecurityGroups[0].id) 
 | order by asg
+
+## ARG EXPLORER: Get VM by IP
+resources 
+| where type == "microsoft.network/networkinterfaces" and tostring(properties.ipConfigurations[0].properties.privateIPAddress) == "10.0.0.5"
+| project nic_id=id, ip=tostring(properties.ipConfigurations[0].properties.privateIPAddress)
+| join (resources| where type == "microsoft.compute/virtualmachines" | project vm_name=name, nic_id=tostring(properties.networkProfile.networkInterfaces[0].id), vm_rg=resourceGroup, subscriptionId
+) on nic_id
+| join kind = inner (ResourceContainers | where type=='microsoft.resources/subscriptions' | project SubName=name, subscriptionId) on subscriptionId
+| project SubName,vm=vm_name,resourceGroup=vm_rg, ip
